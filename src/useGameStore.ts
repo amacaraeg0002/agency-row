@@ -16,7 +16,11 @@ interface GameStore {
 export const useGameStore = create<GameStore>()(
   persist(
     (set, get) => ({
-      game: initialGame(), events: [], sequence: 0, message: "Welcome, founder. Your first card and $2,500 are ready.", lastManualAt: -Infinity,
+     game: initialGame(),
+      events: [],
+      sequence: 0,
+      message: "Welcome, founder. Your first card and $1,000,000 are ready.",
+      lastManualAt: -Infinity,
       advance: () => {
         const state = get(); const result = stepSecond(state.game); let sequence = state.sequence;
         const events = result.productions.map((production): GameEvent => ({
