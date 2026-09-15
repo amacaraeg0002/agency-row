@@ -56,7 +56,10 @@ export const CARDS: Record<CardId, Card> = {
   "ten-alcaraz": { id: "ten-alcaraz", name: "Carlos Alcaraz", sport: "Tennis", rarity: "Diamond", ovr: 95, baseViews: 36000, cpm: 15, theme: "Live Series", quirks: ["#SHOWTIME"], color: "#E5A278", number: "1", imageUrl: "https://a.espncdn.com/i/headshots/tennis/players/full/4363229.png" },
   "ten-sinner": { id: "ten-sinner", name: "Jannik Sinner", sport: "Tennis", rarity: "Gold", ovr: 94, baseViews: 32000, cpm: 14, theme: "Live Series", quirks: [], color: "#00539F", number: "1", imageUrl: "https://a.espncdn.com/i/headshots/tennis/players/full/4442295.png" },
 };
+
 export const CARD_IDS = Object.keys(CARDS) as CardId[];
+export function isCardId(value: unknown): value is CardId { return typeof value === "string" && Object.hasOwn(CARDS, value); }
+
 export const STAFF_ROLES: readonly StaffRole[] = ["intern", "editor", "producer"];
 export const STAFF_SPECS: Record<StaffRole, { name: string; cost: number; maxRank: number }> = {
   intern: { name: "Intern", cost: 1_000, maxRank: 2 },
