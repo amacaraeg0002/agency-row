@@ -19,12 +19,12 @@ export const compact = (value: number): string => Intl.NumberFormat("en-US", {
 
 export function initialGame(): GameSave {
   return {
-    cash: 2_500,
+    cash: 1_000_000, // Boom. $1,000,000 starting cash.
     totalViews: 0,
     inventory: {
-      rookie: { count: 1, views: 0, locked: false },
+      "mlb-holliday": { count: 1, views: 0, locked: false }, // Updated to match our new ESPN roster
     },
-    activeCard: "rookie",
+    activeCard: "mlb-holliday",
     staff: [],
     upgrades: { sponsor: 0 },
     rng: 0x9e3779b9,
@@ -33,7 +33,6 @@ export function initialGame(): GameSave {
     pendingPack: null,
   };
 }
-
 export function triangle(seconds: number, cycle: number): number {
   return Math.abs(2 * ((Math.max(0, seconds) / cycle) % 1) - 1);
 }
