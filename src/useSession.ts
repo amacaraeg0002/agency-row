@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGameStore } from "./useGameStore";
+
 export function useSession(): { ready: boolean; error: string } {
   const [ready, setReady] = useState(false);
   useEffect(() => { useGameStore.persist.rehydrate().then(() => setReady(true)); }, []);
