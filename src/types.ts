@@ -1,7 +1,9 @@
 export const SPORTS = ["Basketball", "Baseball", "Football", "Hockey", "Soccer", "Tennis", "Combat Sports"] as const;
 export type Sport = (typeof SPORTS)[number];
+
 export type Rarity = "Common" | "Bronze" | "Silver" | "Gold" | "Diamond" | "Mythic" | "Hero";
 export type CardId = string;
+
 export type Quirk = "#SHOWTIME" | "#GREATNESS" | "#PickSix" | "#WalkoffKO";
 export type Theme = "Live Series" | "Champion Heroes";
 export type PackId = "nba-pack" | "nfl-pack" | "mlb-pack" | "nhl-pack" | "soccer-pack" | "combat-pack" | "tennis-pack" | "silver-plus" | "diamond-plus" | "hero-vault";
