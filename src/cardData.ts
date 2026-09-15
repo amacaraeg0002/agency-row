@@ -12,201 +12,84 @@ export const PARALLELS = [
 ] as const;
 
 export const CARDS: Record<CardId, Card> = {
-  rookie: {
-    id: "rookie",
-    name: "Jackson Holliday",
-    sport: "Baseball",
-    rarity: "Common",
-    ovr: 62,
-    baseViews: 300,
-    cpm: 1.5,
-    theme: "Base Live",
-    quirks: [],
-    color: "#e86b24",
-    number: "07",
-    imageUrl: "https://a.espncdn.com/i/headshots/mlb/players/full/43085.png",
-  },
-  comeback: {
-    id: "comeback",
-    name: "LeBron James",
-    sport: "Basketball",
-    rarity: "Mythic",
-    ovr: 99,
-    baseViews: 35_000,
-    cpm: 18,
-    theme: "2016 Historic Collection",
-    quirks: ["#GREATNESS", "#SHOWTIME"],
-    color: "#552583",
-    number: "23",
-    imageUrl: "https://a.espncdn.com/i/headshots/nba/players/full/1966.png",
-  },
-  gunslinger: {
-    id: "gunslinger",
-    name: "Patrick Mahomes",
-    sport: "Football",
-    rarity: "Diamond",
-    ovr: 88,
-    baseViews: 12_000,
-    cpm: 9.5,
-    theme: "Base Live",
-    quirks: ["#PickSix"],
-    color: "#e31837",
-    number: "15",
-    imageUrl: "https://a.espncdn.com/i/headshots/nfl/players/full/3139477.png",
-  },
-  maestro: {
-    id: "maestro",
-    name: "Lionel Messi",
-    sport: "Soccer",
-    rarity: "Gold",
-    ovr: 82,
-    baseViews: 4_000,
-    cpm: 5,
-    theme: "Base Live",
-    quirks: [],
-    color: "#7fb3d5",
-    number: "10",
-    imageUrl: "https://a.espncdn.com/i/headshots/soccer/players/full/45843.png",
-  },
-  brawler: {
-    id: "brawler",
-    name: "Conor McGregor",
-    sport: "Combat Sports",
-    rarity: "Silver",
-    ovr: 77,
-    baseViews: 1_800,
-    cpm: 3.25,
-    theme: "Base Live",
-    quirks: ["#WalkoffKO"],
-    color: "#1d9354",
-    number: "01",
-    imageUrl: "https://a.espncdn.com/i/headshots/mma/players/full/3022677.png",
-  },
-  phenom: {
-    id: "phenom",
-    name: "Carlos Alcaraz",
-    sport: "Tennis",
-    rarity: "Bronze",
-    ovr: 71,
-    baseViews: 800,
-    cpm: 2.1,
-    theme: "Base Live",
-    quirks: [],
-    color: "#e5a278",
-    number: "03",
-    imageUrl: "https://a.espncdn.com/i/headshots/tennis/players/full/4363229.png",
-  },
-  "historic-tennis": {
-    id: "historic-tennis",
-    name: "Roger Federer",
-    sport: "Tennis",
-    rarity: "Bronze",
-    ovr: 74,
-    baseViews: 950,
-    cpm: 2.4,
-    theme: "2016 Historic Collection",
-    quirks: [],
-    color: "#eab58a",
-    number: "16",
-    imageUrl: "https://a.espncdn.com/i/headshots/tennis/players/full/425.png",
-  },
-  "historic-combat": {
-    id: "historic-combat",
-    name: "Nate Diaz",
-    sport: "Combat Sports",
-    rarity: "Silver",
-    ovr: 79,
-    baseViews: 2_200,
-    cpm: 3.6,
-    theme: "2016 Historic Collection",
-    quirks: ["#WalkoffKO"],
-    color: "#b3d7dd",
-    number: "209",
-    imageUrl: "https://a.espncdn.com/i/headshots/mma/players/full/2335639.png",
-  },
-  "historic-soccer": {
-    id: "historic-soccer",
-    name: "Cristiano Ronaldo",
-    sport: "Soccer",
-    rarity: "Gold",
-    ovr: 84,
-    baseViews: 5_000,
-    cpm: 5.5,
-    theme: "2016 Historic Collection",
-    quirks: [],
-    color: "#97262c",
-    number: "07",
-    imageUrl: "https://a.espncdn.com/i/headshots/soccer/players/full/22774.png",
-  },
-  "historic-football": {
-    id: "historic-football",
-    name: "Tom Brady",
-    sport: "Football",
-    rarity: "Diamond",
-    ovr: 89,
-    baseViews: 14_000,
-    cpm: 10,
-    theme: "2016 Historic Collection",
-    quirks: ["#PickSix"],
-    color: "#002244",
-    number: "12",
-    imageUrl: "https://a.espncdn.com/i/headshots/nfl/players/full/2330.png",
-  },
+  // === NBA ===
+  "nba-lebron": { id: "nba-lebron", name: "LeBron James", sport: "Basketball", rarity: "Mythic", ovr: 99, baseViews: 35000, cpm: 18, theme: "Icons", quirks: ["#GREATNESS", "#SHOWTIME"], color: "#552583", number: "23", imageUrl: "https://a.espncdn.com/i/headshots/nba/players/full/1966.png" },
+  "nba-curry": { id: "nba-curry", name: "Stephen Curry", sport: "Basketball", rarity: "Diamond", ovr: 96, baseViews: 28000, cpm: 15, theme: "Base Live", quirks: ["#SHOWTIME"], color: "#1D428A", number: "30", imageUrl: "https://a.espncdn.com/i/headshots/nba/players/full/3975.png" },
+  "nba-wemby": { id: "nba-wemby", name: "Victor Wembanyama", sport: "Basketball", rarity: "Gold", ovr: 89, baseViews: 18000, cpm: 12, theme: "Base Live", quirks: ["#PickSix"], color: "#000000", number: "1", imageUrl: "https://a.espncdn.com/i/headshots/nba/players/full/5104157.png" },
+  "nba-ant": { id: "nba-ant", name: "Anthony Edwards", sport: "Basketball", rarity: "Silver", ovr: 88, baseViews: 15000, cpm: 10, theme: "Base Live", quirks: ["#SHOWTIME"], color: "#0C2340", number: "5", imageUrl: "https://a.espncdn.com/i/headshots/nba/players/full/4592275.png" },
+  
+  // === NFL ===
+  "nfl-mahomes": { id: "nfl-mahomes", name: "Patrick Mahomes", sport: "Football", rarity: "Mythic", ovr: 99, baseViews: 32000, cpm: 17, theme: "Icons", quirks: ["#GREATNESS"], color: "#E31837", number: "15", imageUrl: "https://a.espncdn.com/i/headshots/nfl/players/full/3139477.png" },
+  "nfl-lamar": { id: "nfl-lamar", name: "Lamar Jackson", sport: "Football", rarity: "Diamond", ovr: 97, baseViews: 25000, cpm: 14, theme: "Base Live", quirks: ["#SHOWTIME"], color: "#241773", number: "8", imageUrl: "https://a.espncdn.com/i/headshots/nfl/players/full/3916387.png" },
+  "nfl-mccaffrey": { id: "nfl-mccaffrey", name: "Christian McCaffrey", sport: "Football", rarity: "Gold", ovr: 95, baseViews: 19000, cpm: 11, theme: "Base Live", quirks: [], color: "#AA0000", number: "23", imageUrl: "https://a.espncdn.com/i/headshots/nfl/players/full/3115350.png" },
+  "nfl-jefferson": { id: "nfl-jefferson", name: "Justin Jefferson", sport: "Football", rarity: "Silver", ovr: 94, baseViews: 16000, cpm: 9, theme: "Base Live", quirks: ["#SHOWTIME"], color: "#4F2683", number: "18", imageUrl: "https://a.espncdn.com/i/headshots/nfl/players/full/4262921.png" },
+  
+  // === MLB ===
+  "mlb-ohtani": { id: "mlb-ohtani", name: "Shohei Ohtani", sport: "Baseball", rarity: "Mythic", ovr: 99, baseViews: 34000, cpm: 18, theme: "Icons", quirks: ["#GREATNESS", "#WalkoffKO"], color: "#005A9C", number: "17", imageUrl: "https://a.espncdn.com/i/headshots/mlb/players/full/39832.png" },
+  "mlb-judge": { id: "mlb-judge", name: "Aaron Judge", sport: "Baseball", rarity: "Diamond", ovr: 98, baseViews: 26000, cpm: 14, theme: "Base Live", quirks: ["#WalkoffKO"], color: "#003087", number: "99", imageUrl: "https://a.espncdn.com/i/headshots/mlb/players/full/33192.png" },
+  "mlb-soto": { id: "mlb-soto", name: "Juan Soto", sport: "Baseball", rarity: "Gold", ovr: 96, baseViews: 17000, cpm: 11, theme: "Base Live", quirks: [], color: "#003087", number: "22", imageUrl: "https://a.espncdn.com/i/headshots/mlb/players/full/36969.png" },
+  "mlb-holliday": { id: "mlb-holliday", name: "Jackson Holliday", sport: "Baseball", rarity: "Common", ovr: 72, baseViews: 300, cpm: 1.5, theme: "Base Live", quirks: [], color: "#DF4601", number: "7", imageUrl: "https://a.espncdn.com/i/headshots/mlb/players/full/43085.png" },
+
+  // === SOCCER ===
+  "soc-messi": { id: "soc-messi", name: "Lionel Messi", sport: "Soccer", rarity: "Mythic", ovr: 99, baseViews: 38000, cpm: 19, theme: "Icons", quirks: ["#GREATNESS"], color: "#F7B5CD", number: "10", imageUrl: "https://a.espncdn.com/i/headshots/soccer/players/full/45843.png" },
+  "soc-ronaldo": { id: "soc-ronaldo", name: "Cristiano Ronaldo", sport: "Soccer", rarity: "Diamond", ovr: 96, baseViews: 31000, cpm: 16, theme: "Base Live", quirks: ["#SHOWTIME"], color: "#E32221", number: "7", imageUrl: "https://a.espncdn.com/i/headshots/soccer/players/full/22774.png" },
+  "soc-mbappe": { id: "soc-mbappe", name: "Kylian Mbappé", sport: "Soccer", rarity: "Gold", ovr: 95, baseViews: 21000, cpm: 12, theme: "Base Live", quirks: [], color: "#004170", number: "9", imageUrl: "https://a.espncdn.com/i/headshots/soccer/players/full/229804.png" },
+  "soc-bellingham": { id: "soc-bellingham", name: "Jude Bellingham", sport: "Soccer", rarity: "Silver", ovr: 93, baseViews: 17000, cpm: 10, theme: "Base Live", quirks: ["#WalkoffKO"], color: "#FEBE10", number: "5", imageUrl: "https://a.espncdn.com/i/headshots/soccer/players/full/290825.png" },
 };
 
 export const CARD_IDS = Object.keys(CARDS) as CardId[];
 
-export function isCardId(value: unknown): value is CardId {
+export function isCardId(value: unknown): value is string {
   return typeof value === "string" && Object.hasOwn(CARDS, value);
 }
 
 export const STAFF_ROLES: readonly StaffRole[] = ["intern", "editor", "producer"];
 
-export const STAFF_SPECS: Record<
-  StaffRole,
-  { name: string; cost: number; wage: number; maxRank: number }
-> = {
+export const STAFF_SPECS: Record<StaffRole, { name: string; cost: number; wage: number; maxRank: number }> = {
   intern: { name: "Intern", cost: 500, wage: 10, maxRank: 2 },
   editor: { name: "Staff Editor", cost: 2_500, wage: 35, maxRank: 3 },
   producer: { name: "Senior Producer", cost: 10_000, wage: 120, maxRank: 5 },
 };
 
 interface PackSpec {
-  name: string;
-  price: number;
-  count: number;
-  description: string;
+  name: string; price: number; count: number; description: string;
   odds: readonly (readonly [CardId, number])[];
 }
 
 export const PACKS: Record<PackId, PackSpec> = {
   starter: {
-    name: "Prospect Starter Pack",
-    price: 250,
-    count: 3,
-    description: "Three cards. A small beginning. An outside shot at greatness.",
+    name: "Prospect Starter Pack", price: 250, count: 3, description: "Three cards. Mostly prospects with a small shot at greatness.",
     odds: [
-      ["rookie", 0.595],
-      ["phenom", 0.28],
-      ["brawler", 0.1],
-      ["maestro", 0.02],
-      ["gunslinger", 0.0045],
-      ["comeback", 0.0005],
+      ["mlb-holliday", 0.60],
+      ["nba-ant", 0.20],
+      ["nfl-jefferson", 0.15],
+      ["soc-bellingham", 0.04],
+      ["nba-wemby", 0.009],
+      ["mlb-judge", 0.001],
     ],
   },
   marquee: {
-    name: "Marquee 2016 Vault Box",
-    price: 5_000,
-    count: 2,
-    description: "Two historic cards. Every pull belongs to the 2016 collection.",
+    name: "Marquee Star Box", price: 5_000, count: 2, description: "Guaranteed high-tier players. Build your championship roster.",
     odds: [
-      ["historic-tennis", 0.4],
-      ["historic-combat", 0.36],
-      ["historic-soccer", 0.18],
-      ["historic-football", 0.05],
-      ["comeback", 0.01],
+      ["nfl-mccaffrey", 0.35],
+      ["mlb-soto", 0.30],
+      ["soc-mbappe", 0.20],
+      ["nfl-lamar", 0.10],
+      ["nba-curry", 0.04],
+      ["soc-ronaldo", 0.01],
     ],
   },
+  legends: {
+    name: "Iconic Vault", price: 25_000, count: 1, description: "One card. Only the absolute greatest of all time.",
+    odds: [
+      ["nba-curry", 0.40],
+      ["mlb-judge", 0.35],
+      ["nba-lebron", 0.10],
+      ["nfl-mahomes", 0.10],
+      ["mlb-ohtani", 0.03],
+      ["soc-messi", 0.02],
+    ],
+  }
 };
 
 export const QUIRK_DESCRIPTIONS = {
