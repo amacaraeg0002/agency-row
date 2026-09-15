@@ -50,6 +50,11 @@ function Studio() {
 function AgencyFloor({ navigate }: { navigate: (tab: Tab) => void }) {
   const game = useGameStore((state) => state.game);
   const events = useGameStore((state) => state.events);
+  
+  // FIXED: Properly extracted the hooks so they don't crash Vercel on click
+  const upgradeSponsor = useGameStore((state) => state.upgradeSponsor);
+  const upgradeFloor = useGameStore((state) => state.upgradeFloor);
+  
   const sponsorLevel = game.upgrades.sponsor;
   const flvl = game.upgrades.floor;
 
@@ -65,13 +70,13 @@ function AgencyFloor({ navigate }: { navigate: (tab: Tab) => void }) {
           <p className="eyebrow">BRAND PARTNERSHIPS</p>
           <div className="mt-3 flex items-center justify-between"><h2 className="text-xl font-black">Sponsors</h2><TrendingUp size={24} className="text-lime-300" /></div>
           <p className="mt-3 text-sm text-slate-400">Multiplier: {(1 + sponsorLevel * 0.25).toFixed(2)}×.</p>
-          <button className="secondary-button mt-5 w-full justify-between" onClick={useGameStore((s) => s.upgradeSponsor)} disabled={game.cash < sponsorCost(sponsorLevel)}><span>Sign deal</span><span>{money(sponsorCost(sponsorLevel))}</span></button>
+          <button className="secondary-button mt-5 w-full justify-between" onClick={upgradeSponsor} disabled={game.cash < sponsorCost(sponsorLevel)}><span>Sign deal</span><span>{money(sponsorCost(sponsorLevel))}</span></button>
         </section>
         <section className="panel p-6">
           <p className="eyebrow">AGENCY EXPANSION</p>
           <div className="mt-3 flex items-center justify-between"><h2 className="text-xl font-black">Expand Floor</h2><Layers3 size={24} className="text-blue-300" /></div>
           <p className="mt-3 text-sm text-slate-400">Size: {floorSize(flvl)}x{floorSize(flvl)} ft.</p>
-          <button className="secondary-button mt-5 w-full justify-between" onClick={useGameStore((s) => s.upgradeFloor)} disabled={game.cash < floorCost(flvl)}><span>Add +10 sq ft</span><span>{money(floorCost(flvl))}</span></button>
+          <button className="secondary-button mt-5 w-full justify-between" onClick={upgradeFloor} disabled={game.cash < floorCost(flvl)}><span>Add +10 sq ft</span><span>{money(floorCost(flvl))}</span></button>
         </section>
         <section className="panel p-6">
           <p className="eyebrow">LIVE ACTIVITY</p><h2 className="mt-3 text-xl font-black">Recent Clips</h2>
