@@ -11,20 +11,20 @@ export const compact = (value: number): string => Intl.NumberFormat("en-US", { n
 export function initialGame(): GameSave {
   return {
     cash: 1_000_000, totalViews: 0, agencyXp: 0, agencyLevel: 1,
-    inventory: { "mlb-ohtani": { count: 1, views: 1_000_000, locked: true } }, // Maxed Ohtani 1/1 Nebula!
+    inventory: { "mlb-ohtani": { count: 1, views: 1_000_000, locked: true } },
     activeCard: "mlb-ohtani", staff: [], upgrades: { sponsor: 0, floor: 0 },
     nextId: 1, clockMs: 0, pendingPack: null,
   };
 }
 
 export function levelThreshold(level: number) { return level * 1000 * Math.pow(1.5, level - 1); }
-export function cycleDuration(): number { return 1.2; } // EASIER TIMING FOR ALL CARDS
+export function cycleDuration(): number { return 1.2; }
 export function triangle(seconds: number, cycle: number): number { return Math.abs(2 * ((Math.max(0, seconds) / cycle) % 1) - 1); }
 
 export function timing(x: number): { grade: Grade; multiplier: number } {
-  if (x >= 0.45 && x <= 0.55) return { grade: "Perfect", multiplier: 100 }; // 100x
-  if (x >= 0.35 && x <= 0.65) return { grade: "Good", multiplier: 10 }; // 10x
-  return { grade: "Flop", multiplier: 1 }; // 1x
+  if (x >= 0.45 && x <= 0.55) return { grade: "Perfect", multiplier: 100 };
+  if (x >= 0.35 && x <= 0.65) return { grade: "Good", multiplier: 10 };
+  return { grade: "Flop", multiplier: 1 };
 }
 
 export function parallelTier(views: number): number {
@@ -38,7 +38,7 @@ export function trendAt(clockMs: number): Trend {
 }
 
 export function calculateYield(card: Card, accumulatedViews: number, needle: number | null, trend: Trend, sponsor = 1): Yield {
-  const release = needle === null ? { grade: "Auto" as const, multiplier: 10 } : timing(needle); // Auto counts as Good
+  const release = needle === null ? { grade: "Auto" as const, multiplier: 10 } : timing(needle);
   let quirk = 1;
   if (card.quirks.includes("#GREATNESS")) quirk *= 3;
   if (card.quirks.includes("#SHOWTIME") && needle !== null && needle >= 0.49 && needle <= 0.51) quirk *= 2;
@@ -48,16 +48,18 @@ export function calculateYield(card: Card, accumulatedViews: number, needle: num
   let trendMultiplier = card.sport === trend.sport ? trend.multiplier : trend.otherMultiplier;
   if (card.quirks.includes("#GREATNESS")) trendMultiplier = Math.max(1.5, trendMultiplier);
 
-  const scaledBase = card.baseViews * 1.5; // 150% scaled base
+  const scaledBase = card.baseViews * 1.5;
   const views = Math.floor(scaledBase * release.multiplier * quirk * PARALLELS[parallelTier(accumulatedViews)].multiplier * trendMultiplier);
-  const gross = (views / 1_000) * (card.cpm * 1.5) * (needle === null ? 1 : sponsor); // 150% scaled money
+  const gross = (views / 1_000) * (card.cpm * 1.5) * (needle === null ? 1 : sponsor);
   const xp = needle === null ? 50 : (release.grade === "Perfect" ? 1000 : release.grade === "Good" ? 250 : 100);
   
-  return { grade: release.grade, views, gross, net: gross, xp }; // No wages taken!
+  return { grade: release.grade, views, gross, net: gross, xp };
 }
 
+export function sponsorMultiplier(game: GameSave): number { return 1 + game.upgrades.sponsor * 0.25; }
+export function sponsorCost(level: number): number { return 1000 * 2 ** level; }
 export function floorCost(level: number): number { return 25_000 * 2 ** level; }
-export function floorSize(level: number): number { return 15 + (level * 10); } // 15x15 -> 25x25 -> 35x35
+export function floorSize(level: number): number { return 15 + (level * 10); }
 export function quicksellValue(card: Card): number { return card.ovr < 85 ? 500 : card.ovr < 92 ? 5000 : card.ovr < 96 ? 25000 : 100000; }
 export function assignedCopies(game: GameSave, cardId: CardId, excludingDesk?: number): number { return Number(game.activeCard === cardId) + game.staff.filter((s) => s.id !== excludingDesk && s.cardId === cardId).length; }
 export function canSell(game: GameSave, cardId: CardId): boolean { const owned = game.inventory[cardId]; return Boolean(owned && !owned.locked && owned.count > Math.max(1, assignedCopies(game, cardId))); }
@@ -77,7 +79,7 @@ export function openPack(game: GameSave, kind: PackId): GameSave {
   const spec = PACKS[kind];
   if (game.pendingPack || game.cash < spec.price) return game;
   const cards = Array.from({ length: spec.count }, () => {
-    const value = Math.random(); // TRUE RNG
+    const value = Math.random();
     let cumulative = 0; let cardId = spec.odds[spec.odds.length - 1][0];
     for (const [candidate, prob] of spec.odds) {
       cumulative += prob; if (value < cumulative) { cardId = candidate; break; }
@@ -99,7 +101,7 @@ export function stepSecond(game: GameSave): { game: GameSave; productions: Produ
   let next: GameSave = { ...game, clockMs: game.clockMs + 1_000 };
   const productions: Production[] = [];
   if (next.clockMs % TICK_MS !== 0) return { game: next, productions };
-  const trend = trendAt(next.clockMs); const sponsor = 1 + next.upgrades.sponsor * 0.25;
+  const trend = trendAt(next.clockMs); const sponsor = sponsorMultiplier(next);
   for (const desk of next.staff) {
     if (desk.paused || !desk.cardId) continue;
     const owned = next.inventory[desk.cardId]; if (!owned) continue;
