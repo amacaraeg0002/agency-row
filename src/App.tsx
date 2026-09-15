@@ -181,3 +181,13 @@ export default function App() {
     </div>
   );
 }
+<section className="panel p-6">
+          <p className="eyebrow">AGENCY EXPANSION</p>
+          <div className="mt-3 flex items-center justify-between"><h2 className="text-xl font-black">Expand Floor.</h2><Layers3 size={24} className="text-lime-300" /></div>
+          <p className="mt-3 text-sm text-slate-400">Current Size: {floorSize(game.upgrades.floor)}x{floorSize(game.upgrades.floor)} ft.</p>
+          <button className="secondary-button mt-5 w-full justify-between" onClick={useGameStore((s) => s.upgradeFloor)} disabled={game.cash < floorCost(game.upgrades.floor)}>
+            <span>Add +10 sq ft</span>
+            <span>{money(floorCost(game.upgrades.floor))}</span>
+          </button>
+        </section>
+LVL {game.agencyLevel} | XP: {compact(game.agencyXp)} / {compact(levelThreshold(game.agencyLevel))}
