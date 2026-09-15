@@ -1,0 +1,11 @@
+@import "tailwindcss";
+body { @apply bg-[#06090e] text-slate-100 font-sans h-screen overflow-hidden; }
+.panel { @apply rounded-xl border border-white/10 bg-[#0f1520] p-5 shadow-xl; }
+.btn { @apply w-full rounded-lg bg-white/10 px-4 py-2 font-bold transition hover:bg-white/20 active:scale-95 disabled:opacity-40 disabled:pointer-events-none; }
+.btn-green { @apply w-full rounded-lg bg-lime-400 px-4 py-3 font-extrabold text-slate-950 transition hover:bg-lime-300 active:scale-95 disabled:opacity-40; }
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-100px) scale(1.2); }
+}
+.animate-float { animation: floatUp 1s ease-out forwards; position: absolute; pointer-events: none; z-index: 50; }
