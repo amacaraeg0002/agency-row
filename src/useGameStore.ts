@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { CARDS } from "./cardData";
-import { SAVE_KEY, assignCard, awardViews, calculateYield, floorCost, hireStaff, initialGame, money, openPack, quicksellValue, stepSecond, trendAt } from "./economy";
+import { SAVE_KEY, assignCard, awardViews, calculateYield, floorCost, hireStaff, initialGame, money, openPack, quicksellValue, stepSecond, trendAt, sponsorMultiplier } from "./economy";
 import { restoreSave, safeStorage } from "./persistence";
 import type { CardId, GameEvent, GameSave, PackId, StaffRole, Yield } from "./types";
 
@@ -23,7 +23,7 @@ export const useGameStore = create<GameStore>()(persist((set, get) => ({
   manual: (needle) => {
     const state = get(); const now = performance.now();
     const id = state.game.activeCard; const owned = state.game.inventory[id]; if (!owned) return null;
-    const sponsor = 1 + state.game.upgrades.sponsor * 0.25;
+    const sponsor = sponsorMultiplier(state.game);
     const result = calculateYield(CARDS[id], owned.views, needle, trendAt(state.game.clockMs), sponsor);
     const event: GameEvent = { id: state.sequence + 1, deskId: null, at: now, text: `${result.grade} release · ${CARDS[id].name}`, views: result.views, cash: result.net };
     set({ game: awardViews(state.game, id, result), sequence: event.id, events: [...state.events, event].slice(-30), lastManualAt: now, message: `${result.grade} release earned ${money(result.net)} and ${result.xp} XP.` });
@@ -47,4 +47,4 @@ export const useGameStore = create<GameStore>()(persist((set, get) => ({
   upgradeFloor: () => { const game = get().game; set({ game: { ...game, cash: game.cash - floorCost(game.upgrades.floor), upgrades: { ...game.upgrades, floor: game.upgrades.floor + 1 } } }); },
   claimCollectionReward: () => { const game = get().game; set({ game: { ...game, inventory: { ...game.inventory, "hero-brady": { count: 1, views: 1000000, locked: true } } }, message: "100 OVR Tom Brady Unlocked!" }); },
   reset: () => { set({ game: initialGame(), events: [], sequence: 0, lastManualAt: -Infinity, message: "New agency funded." }); },
-}), { name: SAVE_KEY, version: 2, storage: createJSONStorage(() => safeStorage), skipHydration: true, partialize: (state) => ({ game: state.game }), merge: (persisted, current) => ({ ...current, game: restoreSave((persisted as any)?.game ?? persisted) }) }));
+}), { name: SAVE_KEY, version: 3, storage: createJSONStorage(() => safeStorage), skipHydration: true, partialize: (state) => ({ game: state.game }), merge: (persisted, current) => ({ ...current, game: restoreSave((persisted as any)?.game ?? persisted) }) }));
